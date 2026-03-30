@@ -54,7 +54,7 @@ const Footer = () => (
             </div>
             <div className="flex items-center gap-2">
               <Mail size={14} className="text-accent shrink-0" />
-              <a href="mailto:info@creacodes.com" className="hover:text-accent transition-colors">info@creacodes.com</a>
+              <a href="mailto:creacodes.info@gmail.com"  className="hover:text-accent transition-colors">creacodes.info@gmail.com</a>
             </div>
           </div>
         </div>

@@ -14,8 +14,8 @@ const services = [
 ];
 
 const testimonials = [
-  { name: "Rahul Menon", role: "CEO, TechStart", text: "Creacodes transformed our vision into a stunning digital product. Their team is exceptional.", rating: 5 },
-  { name: "Priya Sharma", role: "Founder, DesignHub", text: "Professional, innovative, and delivered on time. Highly recommend their services.", rating: 5 },
+  { name: "Noor Muhammed", role: "CEO, KBS Traders", text: "Creacodes transformed our vision into a stunning digital product. Their team is exceptional.", rating: 5 },
+  { name: "Midhun", role: "Founder, sara'S Pickles", text: "Professional, innovative, and delivered on time. Highly recommend their services.", rating: 5 },
   { name: "Arjun Nair", role: "CTO, DataFlow", text: "Outstanding quality and attention to detail. They truly understand modern tech.", rating: 5 },
 ];
 
@@ -97,9 +97,9 @@ const Index = () => (
             className="grid grid-cols-2 gap-4"
           >
             {[
-              { num: "50+", label: "Projects Delivered" },
+              { num: "30+", label: "Projects Delivered" },
               { num: "30+", label: "Happy Clients" },
-              { num: "5+", label: "Years Experience" },
+              { num: "3+", label: "Years Experience" },
               { num: "10+", label: "Team Members" },
             ].map((stat) => (
               <div key={stat.label} className="bg-card rounded-xl p-6 border border-border text-center hover-lift">
