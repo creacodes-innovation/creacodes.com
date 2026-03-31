@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import { Target, Eye, Heart, Lightbulb } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import { useEffect, useState } from "react";
+
+
+
 
 const values = [
   { icon: Lightbulb, title: "Innovation", desc: "We push boundaries and embrace emerging technologies to stay ahead." },
@@ -9,14 +13,34 @@ const values = [
   { icon: Eye, title: "Transparency", desc: "Open communication and honesty are at the core of our partnerships." },
 ];
 
-const milestones = [
-  { year: "2019", title: "Founded", desc: "Creacodes Innovation established in Kochi, Kerala." },
-  { year: "2020", title: "First Major Client", desc: "Secured our first enterprise-level project." },
-  { year: "2022", title: "Team Expansion", desc: "Grew to a team of 10+ skilled professionals." },
-  { year: "2024", title: "50+ Projects", desc: "Reached the milestone of 50+ successfully delivered projects." },
+// const milestones = [
+//   { year: "2019", title: "Founded", desc: "Creacodes Innovation established in Kochi, Kerala." },
+//   { year: "2020", title: "First Major Client", desc: "Secured our first enterprise-level project." },
+//   { year: "2022", title: "Team Expansion", desc: "Grew to a team of 10+ skilled professionals." },
+//   { year: "2024", title: "50+ Projects", desc: "Reached the milestone of 50+ successfully delivered projects." },
+// ];
+
+const faqs = [
+  {
+    q: "Do you offer customized software solutions?",
+    a: "Yes, we specialize in developing customized software solutions tailored to business needs, including CRM, ERP, HRM, Sales, and School Management Systems."
+  },
+  {
+    q: "What industries do you serve?",
+    a: "We work with various industries, including retail, healthcare, education, real estate, logistics, finance, and more."
+  },
+  {
+    q: "Do you provide post-development support?",
+    a: "Yes, we offer ongoing maintenance, updates, and technical support to ensure your software stays up-to-date."
+  }
 ];
 
-const About = () => (
+const About = () =>{ 
+  const [active, setActive] = useState(null);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return(
   <div className="pt-16">
     {/* Hero */}
     <section className="section-padding hero-bg">
@@ -24,7 +48,7 @@ const About = () => (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-4">About Creacodes</h1>
           <p className="text-primary-foreground/60 max-w-2xl mx-auto text-lg">
-            A passionate team of innovators building the future of digital technology from the heart of Kerala.
+            A passionate team of innovators building the future of digital technology.
           </p>
         </motion.div>
       </div>
@@ -102,7 +126,7 @@ const About = () => (
     </section>
 
     {/* Journey */}
-    <section className="section-padding bg-background">
+    {/* <section className="section-padding bg-background">
       <div className="container mx-auto">
         <SectionHeading badge="Journey" title="Our Milestones" />
         <div className="max-w-2xl mx-auto space-y-8">
@@ -126,8 +150,75 @@ const About = () => (
           ))}
         </div>
       </div>
+    </section> */}
+
+     <section className="section-padding bg-background">
+      <div className="container mx-auto">
+        
+        <div className="text-center mb-12">
+          
+          <SectionHeading badge="FAQ" title="Frequently Asked Questions (FAQ)" />
+        </div>
+
+        <div className="relative max-w-2xl mx-auto">
+
+          {/* Vertical Line */}
+          <div className="absolute left-4 top-0 h-full w-[2px] bg-accent/20"></div>
+
+          <div className="space-y-8">
+            {faqs.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="relative flex gap-4"
+              >
+                
+                {/* Dot */}
+                <div className="w-3 h-3 rounded-full bg-accent mt-2 shrink-0"></div>
+
+                {/* Content */}
+                <div className="w-full">
+                  
+                  {/* Question */}
+                  <button
+                    onClick={() => setActive(active === i ? null : i)}
+                    className="text-left w-full flex justify-between items-center"
+                  >
+                    <h3 className="text-lg font-medium text-foreground">
+                      {item.q}
+                    </h3>
+                    <span className="text-accent text-xl">
+                      {active === i ? "-" : "+"}
+                    </span>
+                  </button>
+
+                  {/* Answer */}
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: active === i ? "auto" : 0,
+                      opacity: active === i ? 1 : 0
+                    }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                      {item.a}
+                    </p>
+                  </motion.div>
+
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </div>
     </section>
   </div>
 );
+}
 
 export default About;

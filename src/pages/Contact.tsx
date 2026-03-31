@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sending, setSending] = useState(false);
@@ -82,8 +88,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-foreground text-sm">Email</h4>
-                    <a href="mailto:info@creacodes.com" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                      info@creacodes.com
+                    <a href="https://mail.google.com/mail/?view=cm&to=creacodes.info@gmail.com" target="_blank" className="text-sm text-muted-foreground hover:text-accent transition-colors">
+                     creacodes.info@gmail.com
                     </a>
                   </div>
                 </div>

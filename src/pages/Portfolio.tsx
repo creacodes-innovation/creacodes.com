@@ -1,22 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Monitor } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import kbsportfolio from '../assets/kbsportfolio.png'
+import fitness from '../assets/fitness.png'
+import saas from '../assets/saas.jpg'
+import restraunt from '../assets/restruant.png'
+import lms from '../assets/lms.png'
+import brd from '../assets/Brand Identity.jpg'
 
 const categories = ["All", "Web", "Mobile", "Design", "Marketing"];
 
 const projects = [
-  { title: "E-Commerce Platform", category: "Web", desc: "Full-stack e-commerce with payments and inventory management.", tech: ["React", "Node.js", "MongoDB"], color: "from-accent/20 to-accent/5" },
-  { title: "Health & Fitness App", category: "Mobile", desc: "Cross-platform fitness tracking app with real-time analytics.", tech: ["React Native", "Firebase"], color: "from-blue-500/20 to-blue-500/5" },
-  { title: "SaaS Dashboard", category: "Design", desc: "Modern analytics dashboard with data visualization.", tech: ["Figma", "React", "D3.js"], color: "from-violet-500/20 to-violet-500/5" },
-  { title: "Restaurant Booking", category: "Web", desc: "Online reservation system with real-time availability.", tech: ["Next.js", "PostgreSQL"], color: "from-emerald-500/20 to-emerald-500/5" },
-  { title: "Learning Platform", category: "Web", desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS", "Stripe"], color: "from-orange-500/20 to-orange-500/5" },
-  { title: "Brand Identity", category: "Design", desc: "Complete brand identity and marketing collateral.", tech: ["Illustrator", "Figma"], color: "from-pink-500/20 to-pink-500/5" },
-  { title: "Delivery Tracker", category: "Mobile", desc: "Real-time delivery tracking with push notifications.", tech: ["Flutter", "Firebase"], color: "from-cyan-500/20 to-cyan-500/5" },
-  { title: "SEO Campaign", category: "Marketing", desc: "Comprehensive SEO strategy resulting in 200% traffic growth.", tech: ["Google Analytics", "SEMrush"], color: "from-yellow-500/20 to-yellow-500/5" },
+  { title: "E-Commerce Platform", category: "Web", desc: "Full-stack e-commerce with payments and inventory management.", tech: ["React", "Node.js", "MongoDB"], img : kbsportfolio},
+  { title: "Health & Fitness App", category: "Mobile", desc: "Cross-platform fitness tracking app with real-time analytics.", tech: ["React Native", "Firebase"], img: fitness  },
+  { title: "SaaS Dashboard", category: "Design", desc: "Modern analytics dashboard with data visualization and insights.", tech: ["Figma", "React", "D3.js"], img: saas },
+  { title: "Restaurant Booking", category: "Web", desc: "Online reservation system with real-time availability.", tech: ["Next.js", "PostgreSQL"], img: restraunt},
+  { title: "Learning Platform", category: "Web", desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS", "Stripe"], img: lms },
+  { title: "Brand Identity", category: "Design", desc: "Complete brand identity and marketing collateral.", tech: ["Illustrator", "Figma"], img: brd },
 ];
 
 const Portfolio = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [active, setActive] = useState("All");
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
@@ -69,10 +78,11 @@ const Portfolio = () => {
                   transition={{ delay: i * 0.05 }}
                   className="rounded-xl overflow-hidden border border-border hover-lift group"
                 >
-                  <div className={`h-48 bg-gradient-to-br ${project.color} flex items-center justify-center relative`}>
-                    <Monitor size={48} className="text-muted-foreground/20" />
+                  <div className={`h-48 bg-gradient-to-br flex items-center justify-center relative`}>
+                    <img src={project.img} alt=""  className="h-full w-full object-cover"/>
                     <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center">
+                        
                         <ExternalLink size={14} className="text-foreground" />
                       </div>
                     </div>

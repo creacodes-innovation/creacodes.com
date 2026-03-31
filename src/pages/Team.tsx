@@ -1,17 +1,25 @@
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
+import { useEffect } from "react";
 
 const team = [
-  { name: "Arun Kumar", role: "Founder & CEO", expertise: "Strategy & Leadership", initials: "AK" },
-  { name: "Sneha Nair", role: "Lead Developer", expertise: "Full-Stack Development", initials: "SN" },
-  { name: "Vishnu Prasad", role: "UI/UX Designer", expertise: "Product Design", initials: "VP" },
+  { name: "Sribinand MV", role: "Founder & CEO", expertise: "Strategy & Leadership", initials: "SD" },
+  { name: "Muhammed Shibili", role: "Co-Founder & Developer", expertise: "Strategy & Leadership", initials: "MS" },
+  { name: "Sinan KP", role: "UI/UX Designer", expertise: "Product Design", initials: "S" },
   { name: "Divya Thomas", role: "Mobile Developer", expertise: "React Native & Flutter", initials: "DT" },
-  { name: "Rahul Menon", role: "Backend Engineer", expertise: "Cloud & DevOps", initials: "RM" },
+  { name: "Safeer MK", role: "Backend Engineer", expertise: "Cloud & DevOps", initials: "S" },
   { name: "Anjali Krishnan", role: "Digital Marketer", expertise: "SEO & Growth", initials: "AK" },
 ];
 
-const Team = () => (
+const Team = () =>{  
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return(
   <div className="pt-16">
     <section className="section-padding hero-bg">
       <div className="container mx-auto text-center">
@@ -68,5 +76,6 @@ const Team = () => (
     </section>
   </div>
 );
+}
 
 export default Team;

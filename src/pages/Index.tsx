@@ -4,6 +4,7 @@ import { ArrowRight, Code, Smartphone, Palette, Monitor, Megaphone, Star, Chevro
 import { Button } from "@/components/ui/button";
 import SectionHeading from "@/components/SectionHeading";
 import heroBg from "@/assets/hero-bg.jpg";
+import { useEffect } from "react";
 
 const services = [
   { icon: Code, title: "Website Development", desc: "Custom, high-performance websites that deliver results." },
@@ -25,7 +26,13 @@ const projects = [
   { title: "SaaS Dashboard", category: "UI/UX Design", color: "from-violet-500/20 to-violet-500/5" },
 ];
 
-const Index = () => (
+const Index = () => { 
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return(
   <div>
     {/* Hero */}
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -246,5 +253,6 @@ const Index = () => (
     </section>
   </div>
 );
+}
 
 export default Index;
