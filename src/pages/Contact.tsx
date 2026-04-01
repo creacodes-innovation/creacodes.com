@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import linkedIn from '../assets/linkedin (2).png'
+import whatsapp from '../assets/whatsapp.png'
+import instagram from '../assets/instagram (1).png'
+import facebook from '../assets/facebook-logo.png'
 
 const Contact = () => {
 
@@ -89,9 +93,57 @@ const Contact = () => {
                   <div>
                     <h4 className="font-medium text-foreground text-sm">Email</h4>
                     <a href="https://mail.google.com/mail/?view=cm&to=creacodes.info@gmail.com" target="_blank" className="text-sm text-muted-foreground hover:text-accent transition-colors">
-                     creacodes.info@gmail.com
+                      creacodes.info@gmail.com
                     </a>
                   </div>
+
+                </div>
+                <div className="flex items-center gap-4 mt-3 flex-wrap">
+
+                  {/* LinkedIn */}
+                  <a href="https://www.linkedin.com/company/creacodes/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
+                      <img
+                        src={linkedIn}
+                        alt="LinkedIn"
+                        className="w-4 h-4 transition duration-300 group-hover:scale-110 group-hover:invert"
+                      />
+                    </div>
+                  </a>
+
+                  {/* WhatsApp */}
+                  <a href="https://wa.me/918714851501" target="_blank" rel="noopener noreferrer">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
+                      <img
+                        src={whatsapp}
+                        alt="WhatsApp"
+                        className="w-4 h-4 transition duration-300 group-hover:scale-110 group-hover:invert"
+                      />
+                    </div>
+                  </a>
+
+                  {/* Instagram */}
+                  <a href="https://www.instagram.com/creacodes.official?igsh=MXJtZ2o3cGpmdTJibA==" target="_blank" rel="noopener noreferrer">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
+                      <img
+                        src={instagram}
+                        alt="Instagram"
+                        className="w-4 h-4 transition duration-300 group-hover:scale-110 group-hover:invert"
+                      />
+                    </div>
+                  </a>
+
+                  {/* Facebook */}
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
+                      <img
+                        src={facebook}
+                        alt="Facebook"
+                        className="w-4 h-4 transition duration-300 group-hover:scale-110 group-hover:invert"
+                      />
+                    </div>
+                  </a>
+
                 </div>
               </div>
             </motion.div>
@@ -103,49 +155,68 @@ const Contact = () => {
               viewport={{ once: true }}
               className="md:col-span-3"
             >
-              <form onSubmit={handleSubmit} className="bg-card rounded-xl border border-border p-6 md:p-8 space-y-5">
+              <form
+                action="https://formsubmit.co/creacodes.info@gmail.com"
+                method="POST"
+                className="bg-card rounded-xl border border-border p-6 md:p-8 space-y-5"
+              >
+                {/* Optional hidden configs */}
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_next" value="https://https://creacodes-com.vercel.app//thank-you" />
+
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-1.5 block">Name *</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">
+                      Name *
+                    </label>
                     <Input
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      name="name"
                       placeholder="Your name"
                       maxLength={100}
+                      required
                     />
                   </div>
+
                   <div>
-                    <label className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">
+                      Email *
+                    </label>
                     <Input
                       type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      name="email"
                       placeholder="your@email.com"
                       maxLength={255}
+                      required
                     />
                   </div>
                 </div>
+
                 <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Phone</label>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">
+                    Phone
+                  </label>
                   <Input
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    name="phone"
                     placeholder="+91 XXXXX XXXXX"
                     maxLength={20}
                   />
                 </div>
+
                 <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Message *</label>
+                  <label className="text-sm font-medium text-foreground mb-1.5 block">
+                    Message *
+                  </label>
                   <Textarea
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    name="message"
                     placeholder="Tell us about your project..."
                     rows={5}
                     maxLength={1000}
+                    required
                   />
                 </div>
-                <Button type="submit" variant="hero" className="w-full" disabled={sending}>
-                  {sending ? "Sending..." : "Send Message"} <Send size={16} />
+
+                <Button type="submit" variant="hero" className="w-full">
+                  Send Message <Send size={16} />
                 </Button>
               </form>
             </motion.div>
@@ -155,7 +226,7 @@ const Contact = () => {
           <div className="mt-16 rounded-xl overflow-hidden border border-border h-80">
             <iframe
               title="Creacodes Innovation Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251482.54820882048!2d76.13245036820985!3d9.982372058498027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5f3f59b!2sKochi%2C%20Kerala%2C%20India!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31428.34280318155!2d76.3131451350955!3d10.054530370187695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c269c104ecd%3A0x845435f558157962!2sKalamassery%2C%20Kochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1775023224065!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}

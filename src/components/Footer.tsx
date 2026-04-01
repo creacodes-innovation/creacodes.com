@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import logo from "@/assets/creacodes-logo.png";
+import linkedIn from '../assets/linkedin (2).png'
+import whatsapp from '../assets/whatsapp.png'
+import instagram from '../assets/instagram (1).png'
+import facebook from '../assets/facebook-logo.png'
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground">
@@ -54,7 +58,52 @@ const Footer = () => (
             </div>
             <div className="flex items-center gap-2">
               <Mail size={14} className="text-accent shrink-0" />
-              <a href="https://mail.google.com/mail/?view=cm&to=creacodes.info@gmail.com"  target="_blank"  className="hover:text-accent transition-colors">creacodes.info@gmail.com</a>
+              <a href="https://mail.google.com/mail/?view=cm&to=creacodes.info@gmail.com" target="_blank" className="hover:text-accent transition-colors">creacodes.info@gmail.com</a>
+            </div>
+            <div className="flex items-center gap-4 mt-2 flex-wrap">
+
+              {/* LinkedIn */}
+              <a href="https://www.linkedin.com/company/creacodes/?viewAsMember=true" target="_blank">
+                <div className="p-2 rounded-full bg-transparent hover:bg-accent transition duration-300 cursor-pointer group">
+                  <img
+                    src={linkedIn}
+                    alt="LinkedIn"
+                    className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
+                  />
+                </div>
+              </a>
+
+              {/* WhatsApp */}
+              <a href="https://wa.me/918714851501" target="_blank">
+                <div className="p-2 rounded-full bg-transparent hover:bg-accent transition duration-300 cursor-pointer group">
+                  <img
+                    src={whatsapp}
+                    alt="WhatsApp"
+                    className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
+                  />
+                </div>
+              </a>
+
+              {/* Instagram */}
+              <a href="https://www.instagram.com/creacodes.official?igsh=MXJtZ2o3cGpmdTJibA==" target="_blank">
+                <div className="p-2 rounded-full bg-transparent hover:bg-accent transition duration-300 cursor-pointer group">
+                  <img
+                    src={instagram}
+                    alt="Instagram"
+                    className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
+                  />
+                </div>
+              </a>
+
+              {/* Facebook */}
+              <div className="p-2 rounded-full bg-transparent hover:bg-accent transition duration-300 cursor-pointer group">
+                <img
+                  src={facebook}
+                  alt="Facebook"
+                  className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
+                />
+              </div>
+
             </div>
           </div>
         </div>
