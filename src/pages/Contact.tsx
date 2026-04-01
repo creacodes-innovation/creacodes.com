@@ -162,7 +162,7 @@ const Contact = () => {
               >
                 {/* Optional hidden configs */}
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_next" value="https://https://creacodes-com.vercel.app//thank-you" />
+                <input type="hidden" name="_next" value="https://creacodes-com.vercel.app//thank-you" />
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
