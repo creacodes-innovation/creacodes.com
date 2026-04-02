@@ -18,8 +18,8 @@ const services = [
 ];
 
 const testimonials = [
-  { name: "Noor Muhammed", role: "CEO, KBS Traders", text: "Creacodes transformed our vision into a stunning digital product. Their team is exceptional.", rating: 5 },
-  { name: "Midhun", role: "Founder, sara'S Pickles", text: "Professional, innovative, and delivered on time. Highly recommend their services.", rating: 5 },
+  { name: "Riyas", role: "CEO, Resto", text: "Creacodes transformed our vision into a stunning digital product. Their team is exceptional.", rating: 5 },
+  { name: "Midhun", role: "Founder, BLOOM", text: "Professional, innovative, and delivered on time. Highly recommend their services.", rating: 5 },
   { name: "Arjun Nair", role: "CTO, DataFlow", text: "Outstanding quality and attention to detail. They truly understand modern tech.", rating: 5 },
 ];
 
