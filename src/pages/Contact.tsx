@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from "@emailjs/browser";
 
 import linkedIn from '../assets/linkedin (2).png'
 import whatsapp from '../assets/whatsapp.png'
@@ -29,7 +28,8 @@ const Contact = () => {
 
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ✅ Web3Forms Submit
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
@@ -42,28 +42,52 @@ const Contact = () => {
 
     setSending(true);
 
-    emailjs.send(
-      "service_nqrmktr",
-      "template_sds3c54",
-      form,
-      "bdG-kDUneyA3Apfwe"
-    )
-      .then(() => {
+    try {
+      const formData = new FormData();
+
+      // 🔥 Your Web3Forms Access Key
+      formData.append("access_key", "9b1c016f-9b85-417c-9087-2864a564f633");
+
+      // ✅ Form Fields
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("message", form.message);
+
+      // 🚀 Custom Email Setup
+      formData.append("subject", `New Contact from ${form.name}`);
+      formData.append("from_name", form.name);
+      formData.append("replyto", form.email);
+
+      // 🔒 Anti-spam
+      formData.append("botcheck", "");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
         toast({
           title: "Message sent!",
           description: "We'll get back to you soon."
         });
         setForm({ name: "", email: "", phone: "", message: "" });
-        setSending(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        toast({
-          title: "Failed to send",
-          variant: "destructive"
-        });
-        setSending(false);
+      } else {
+        throw new Error("Failed");
+      }
+
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Failed to send",
+        variant: "destructive"
       });
+    }
+
+    setSending(false);
   };
 
   return (
@@ -94,7 +118,6 @@ const Contact = () => {
               viewport={{ once: true }}
               className="md:col-span-2 space-y-8"
             >
-              {/* Heading */}
               <div className="space-y-1">
                 <h2 className="text-2xl font-bold text-gray-900">
                   Let's Talk
@@ -105,10 +128,8 @@ const Contact = () => {
                 </p>
               </div>
 
-              {/* Info Cards */}
               <div className="space-y-5">
 
-                {/* Address */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
                     <MapPin size={18} className="text-cyan-600" />
@@ -119,7 +140,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
                     <Phone size={18} className="text-cyan-600" />
@@ -135,7 +155,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
                     <Mail size={18} className="text-cyan-600" />
@@ -143,7 +162,8 @@ const Contact = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-900">Email</h4>
                     <a
-                      href="mailto:creacodes.info@gmail.com"
+                      href="https://mail.google.com/mail/?view=cm&to=creacodes.info@gmail.com"
+                      target="_blank"
                       className="text-sm text-gray-500 hover:text-cyan-600 transition"
                     >
                       creacodes.info@gmail.com
@@ -154,47 +174,27 @@ const Contact = () => {
                 {/* Social Icons */}
                 <div className="flex items-center gap-4 mt-3 flex-wrap">
 
-                  {/* LinkedIn */}
-                  <a href="https://www.linkedin.com/company/creacodes/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
-                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
-                      <img
-                        src={linkedIn}
-                        alt="LinkedIn"
-                        className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
-                      />
+                  <a href="https://www.linkedin.com/company/creacodes/?viewAsMember=true" target="_blank">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer">
+                      <img src={linkedIn} className="w-4 h-4" />
                     </div>
                   </a>
 
-                  {/* WhatsApp */}
-                  <a href="https://wa.me/918714851501" target="_blank" rel="noopener noreferrer">
-                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
-                      <img
-                        src={whatsapp}
-                        alt="WhatsApp"
-                        className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
-                      />
+                  <a href="https://wa.me/918714851501" target="_blank">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer">
+                      <img src={whatsapp} className="w-4 h-4" />
                     </div>
                   </a>
 
-                  {/* Instagram */}
-                  <a href="https://www.instagram.com/creacodes.official?igsh=MXJtZ2o3cGpmdTJibA==" target="_blank" rel="noopener noreferrer">
-                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
-                      <img
-                        src={instagram}
-                        alt="Instagram"
-                        className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
-                      />
+                  <a href="https://www.instagram.com/creacodes.official" target="_blank">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer">
+                      <img src={instagram} className="w-4 h-4" />
                     </div>
                   </a>
 
-                  {/* Facebook */}
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer group shadow-sm hover:shadow-md">
-                      <img
-                        src={facebook}
-                        alt="Facebook"
-                        className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
-                      />
+                  <a href="https://facebook.com" target="_blank">
+                    <div className="p-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-accent transition duration-300 cursor-pointer">
+                      <img src={facebook} className="w-4 h-4" />
                     </div>
                   </a>
 
@@ -214,71 +214,44 @@ const Contact = () => {
                 onSubmit={handleSubmit}
                 className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8 space-y-5 shadow-sm"
               >
-                {/* Name + Email */}
+
                 <div className="grid sm:grid-cols-2 gap-4">
 
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-1 block">
-                      Name *
-                    </label>
-                    <Input
-                      value={form.name}
-                      onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      placeholder="Your name"
-                      className="rounded-lg h-11 bg-gray-50 border-gray-200 focus:ring-2 focus:ring-cyan-500"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-1 block">
-                      Email *
-                    </label>
-                    <Input
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="your@email.com"
-                      className="rounded-lg h-11 bg-gray-50 border-gray-200 focus:ring-2 focus:ring-cyan-500"
-                      required
-                    />
-                  </div>
-
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label className="text-sm font-medium text-gray-700 mb-1 block">
-                    Phone
-                  </label>
                   <Input
-                    value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    placeholder="+91 XXXXX XXXXX"
-                    className="rounded-lg h-11 bg-gray-50 border-gray-200 focus:ring-2 focus:ring-cyan-500"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="text-sm font-medium text-gray-700 mb-1 block">
-                    Message *
-                  </label>
-                  <Textarea
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    placeholder="Tell us about your project..."
-                    rows={5}
-                    className="rounded-lg bg-gray-50 border-gray-200 focus:ring-2 focus:ring-cyan-500"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Your name"
                     required
                   />
+
+                  <Input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="your@email.com"
+                    required
+                  />
+
                 </div>
 
-                {/* Button */}
+                <Input
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  placeholder="+91 XXXXX XXXXX"
+                />
+
+                <Textarea
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Tell us about your project..."
+                  rows={5}
+                  required
+                />
+
                 <Button
                   type="submit"
                   disabled={sending}
-                  className="w-full h-12 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium shadow-md"
+                  className="w-full h-12 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white"
                 >
                   {sending ? "Sending..." : "Send Message"} <Send size={16} className="ml-2" />
                 </Button>
@@ -287,17 +260,6 @@ const Contact = () => {
             </motion.div>
 
           </div>
-
-          {/* Map */}
-          <div className="mt-10">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31428.34280318155!2d76.3131451350955!3d10.054530370187695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c269c104ecd%3A0x845435f558157962!2sKalamassery%2C%20Kochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1775040822243!5m2!1sen!2sin"
-              width="100%"
-              height="300"
-              style={{ border: 0 }}
-            ></iframe>
-          </div>
-
         </div>
       </section>
     </div>

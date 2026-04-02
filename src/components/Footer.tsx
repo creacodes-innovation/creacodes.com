@@ -96,6 +96,7 @@ const Footer = () => (
               </a>
 
               {/* Facebook */}
+              <a href="https://facebook.com" target="_blank">
               <div className="p-2 rounded-full bg-transparent hover:bg-accent transition duration-300 cursor-pointer group">
                 <img
                   src={facebook}
@@ -103,7 +104,7 @@ const Footer = () => (
                   className="w-5 h-5 transition duration-300 group-hover:scale-110 group-hover:invert"
                 />
               </div>
-
+                </a>
             </div>
           </div>
         </div>
