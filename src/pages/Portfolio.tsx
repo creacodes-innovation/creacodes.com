@@ -12,11 +12,12 @@ import brd from '../assets/Brand Identity.jpg'
 const categories = ["All", "Web", "Mobile", "Design", "Marketing"];
 
 const projects = [
-  { title: "E-Commerce Platform", category: "Web", desc: "Full-stack e-commerce with payments and inventory management.", tech: ["React", "Node.js", "MongoDB"], img : kbsportfolio},
-  { title: "Health & Fitness App", category: "Mobile", desc: "Cross-platform fitness tracking app with real-time analytics.", tech: ["React Native", "Firebase"], img: fitness  },
+  { title: "E-Commerce Platform", category: "Web", desc: "Full-stack e-commerce with payments and inventory management.", tech: ["React", "Node.js", "MongoDB"], img: kbsportfolio, link: 'https://kbstraders.com/' },
+    { title: "Learning Platform", category: "Web", desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS"], img: lms , link: 'https://delah-orcin.vercel.app/'},
+  { title: "Health & Fitness App", category: "Mobile", desc: "Cross-platform fitness tracking app with real-time analytics.", tech: ["React Native", "Firebase"], img: fitness },
   { title: "SaaS Dashboard", category: "Design", desc: "Modern analytics dashboard with data visualization and insights.", tech: ["Figma", "React", "D3.js"], img: saas },
-  { title: "Restaurant Booking", category: "Web", desc: "Online reservation system with real-time availability.", tech: ["Next.js", "PostgreSQL"], img: restraunt},
-  { title: "Learning Platform", category: "Web", desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS", "Stripe"], img: lms },
+  { title: "Restaurant Booking", category: "Web", desc: "Online reservation system with real-time availability.", tech: ["Next.js", "PostgreSQL"], img: restraunt },
+
   { title: "Brand Identity", category: "Design", desc: "Complete brand identity and marketing collateral.", tech: ["Illustrator", "Figma"], img: brd },
 ];
 
@@ -50,11 +51,10 @@ const Portfolio = () => {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  active === cat
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${active === cat
                     ? "bg-accent text-accent-foreground"
                     : "bg-muted text-muted-foreground hover:text-foreground"
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -79,12 +79,16 @@ const Portfolio = () => {
                   className="rounded-xl overflow-hidden border border-border hover-lift group"
                 >
                   <div className={`h-48 bg-gradient-to-br flex items-center justify-center relative`}>
-                    <img src={project.img} alt=""  className="h-full w-full object-cover"/>
+                    <img src={project.img} alt="" className="h-full w-full object-cover" />
                     <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center">
-                        
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-full bg-card flex items-center justify-center"
+                      >
                         <ExternalLink size={14} className="text-foreground" />
-                      </div>
+                      </a>
                     </div>
                   </div>
                   <div className="p-5 bg-card">

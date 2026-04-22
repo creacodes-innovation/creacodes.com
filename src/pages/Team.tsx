@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const team = [
   { name: "Sribinand MV", role: "Founder & CEO", expertise: "Strategy & Leadership", initials: "SD" },
   { name: "Muhammed Shibili", role: "Co-Founder & Developer", expertise: "Strategy & Leadership", initials: "MS" },
-  { name: "Sinan KP", role: "UI/UX Designer", expertise: "Product Design", initials: "S" },
+  { name: "Sinan KP", role: "Sales Executive", expertise: "Client Relationship Management", initials: "S" },
   { name: "Divya Thomas", role: "Mobile Developer", expertise: "React Native & Flutter", initials: "DT" },
   { name: "Safeer MK", role: "Backend Engineer", expertise: "Cloud & DevOps", initials: "S" },
   { name: "Anjali Krishnan", role: "Digital Marketer", expertise: "SEO & Growth", initials: "AK" },
