@@ -13,7 +13,7 @@ const categories = ["All", "Web", "Mobile", "Design", "Marketing"];
 
 const projects = [
   { title: "E-Commerce Platform", category: "Web", desc: "Full-stack e-commerce with payments and inventory management.", tech: ["React", "Node.js", "MongoDB"], img: kbsportfolio, link: 'https://kbstraders.com/' },
-    { title: "Learning Platform", category: "Web", desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS"], img: lms , link: 'https://delah-orcin.vercel.app/'},
+  { title: "Learning Platform", category: ["Web","Marketing"], desc: "Interactive e-learning platform with video courses.", tech: ["React", "AWS"], img: lms, link: 'https://delah-orcin.vercel.app/' },
   { title: "Health & Fitness App", category: "Mobile", desc: "Cross-platform fitness tracking app with real-time analytics.", tech: ["React Native", "Firebase"], img: fitness },
   { title: "SaaS Dashboard", category: "Design", desc: "Modern analytics dashboard with data visualization and insights.", tech: ["Figma", "React", "D3.js"], img: saas },
   { title: "Restaurant Booking", category: "Web", desc: "Online reservation system with real-time availability.", tech: ["Next.js", "PostgreSQL"], img: restraunt },
@@ -28,7 +28,14 @@ const Portfolio = () => {
   }, []);
 
   const [active, setActive] = useState("All");
-  const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
+  const filtered =
+    active === "All"
+      ? projects
+      : projects.filter((p) =>
+        Array.isArray(p.category)
+          ? p.category.includes(active)
+          : p.category === active
+      );
 
   return (
     <div className="pt-16">
@@ -52,8 +59,8 @@ const Portfolio = () => {
                 key={cat}
                 onClick={() => setActive(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${active === cat
-                    ? "bg-accent text-accent-foreground"
-                    : "bg-muted text-muted-foreground hover:text-foreground"
+                  ? "bg-accent text-accent-foreground"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
                   }`}
               >
                 {cat}
@@ -92,7 +99,11 @@ const Portfolio = () => {
                     </div>
                   </div>
                   <div className="p-5 bg-card">
-                    <span className="text-xs text-accent font-medium">{project.category}</span>
+                    <span className="text-xs text-accent font-medium">
+                      {Array.isArray(project.category)
+                        ? project.category.join(", ")
+                        : project.category}
+                    </span>
                     <h3 className="font-semibold text-foreground mt-1 mb-2">{project.title}</h3>
                     <p className="text-sm text-muted-foreground mb-3">{project.desc}</p>
                     <div className="flex flex-wrap gap-1.5">
